@@ -21,7 +21,7 @@ try{
 
       $username = $user['username'];
       $_SESSION['username'] = $username;
-      $objUser->redirect('emp_form.php');
+      $objUser->redirect('emp_index.php');
  }else{
    $objUser->redirect('index.php');
  }

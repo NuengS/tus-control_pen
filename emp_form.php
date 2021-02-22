@@ -1,5 +1,4 @@
-
-  <?php
+<?php
 // Show PHP errors
 ini_set('display_errors',1);
 ini_set('display_startup_erros',1);
@@ -29,39 +28,43 @@ if(isset($_POST['btn_save'])){
  }
  
  ?>
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" type="text/css" href="css/form.css">
-    </head>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/form.css">
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+</head>
+
 <body>
-    
-    <form  method="post" class="emform">
-    <div class="col-25">
-        <label for="emp_id">รหัสพนักงาน *</label>
-    </div>
-    <div class="col-75">
-        <input type="text" name="emp_id" id="emp_id" autofocus placeholder="รหัสตามบัตรพนักงาน"  required>
-    </div>
-    <div class="col-25">
-        <label for=”emp_name” placeholder=”ชื่อนามสกุล พนักงาน”>ชื่อ นามสกุล</label>
+
+    <form method="post" class="emform">
+        <div class="    ">
+            <label for="emp_id">รหัสพนักงาน *</label>
         </div>
         <div class="col-75">
-        <input type="text" name="emp_name" id="emp_name" autofocus placeholder="ชื่อ นามสกุล"  required>
-    </div>
+            <input type="text" name="emp_id" id="emp_id" autofocus placeholder="รหัสตามบัตรพนักงาน" required>
+        </div>
+        <div class="col-25">
+            <label for=”emp_name” placeholder=”ชื่อนามสกุล พนักงาน”>ชื่อ นามสกุล</label>
+        </div>
+        <div class="col-75">
+            <input type="text" name="emp_name" id="emp_name" autofocus placeholder="ชื่อ นามสกุล" required>
+        </div>
 
-    <div class="col-25">
-        <label for="gender">เพศ *</label><br><br>
-        <input type="radio" id="female" checked name="gender" value="F">
-        <label for="female">หญิง</label>
-        <input type="radio" id="male" name="gender" value="M">
-        <label for="male">ชาย</label><br>              
-    </div><br>
+        <div class="col-25">
+            <label for="gender">เพศ *</label><br><br>
+            <input type="radio" id="female" checked name="gender" value="F">
+            <label for="female">หญิง</label>
+            <input type="radio" id="male" name="gender" value="M">
+            <label for="male">ชาย</label><br>
+        </div><br>
 
-    <div >
-        <label for="dept_id">แผนก/ฝ่าย *</label>
-        <select name="dept_id" id="dept_id" class="form-control">
-            <?php    
+        <div>
+            <label for="dept_id">แผนก/ฝ่าย *</label>
+            <select name="dept_id" id="dept_id" class="form-control">
+                <?php    
                 $sql = "select * from department";
                     $stmt = $objUser->runQuery($sql);
                     $stmt->execute();
@@ -73,13 +76,13 @@ if(isset($_POST['btn_save'])){
                     } 
                 }
                 ?>
-            
-        </select>
-    </div><br>
-    <div >
-        <label for="work_type_id">ประเภทของงาน *</label>
-        <select name="work_type_id" id="work_type_id" class="form-control">
-            <?php    
+
+            </select>
+        </div><br>
+        <div>
+            <label for="work_type_id">ประเภทของงาน *</label>
+            <select name="work_type_id" id="work_type_id" class="form-control">
+                <?php    
                 $sql = "select * from work_type";
                     $stmt = $objUser->runQuery($sql);
                     $stmt->execute();
@@ -91,13 +94,13 @@ if(isset($_POST['btn_save'])){
                     } 
                 }
                 ?>
-            
-        </select>
-    </div><br>
-    <div >
-        <label for="emp_type_id">ประเภทของพนักงาน *</label>
-        <select name="emp_type_id" id="emp_type_id" class="form-control">
-            <?php    
+
+            </select>
+        </div><br>
+        <div>
+            <label for="emp_type_id">ประเภทของพนักงาน *</label>
+            <select name="emp_type_id" id="emp_type_id" class="form-control">
+                <?php    
                 $sql = "select * from emp_type";
                     $stmt = $objUser->runQuery($sql);
                     $stmt->execute();
@@ -109,15 +112,15 @@ if(isset($_POST['btn_save'])){
                     } 
                 }
                 ?>
-            
-        </select>
-    </div><br>
-    <div class="container-login100-form-btn">
-		<button class="login100-form-btn" type="submit" name="btn_save" value="Save">
-		Save
-		</button>
-	</div>
+
+            </select>
+        </div><br>
+        <div class="container-login100-form-btn">
+            <button class="login100-form-btn" type="submit" name="btn_save" value="Save">
+                Save
+            </button>
+        </div>
     </form>
 </body>
-</html>
 
+</html>
