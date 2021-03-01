@@ -1,6 +1,6 @@
 <?php
 require_once 'database.php';
-class User{
+class Emp{
     private $conn;
     // Constructor
     public function __construct(){
@@ -19,21 +19,18 @@ class User{
     }
     
     // Insert employee
-    public function insert($emp_id, $emp_name, $gender, $dept_id, $work_type_id, $emp_type_id){
+    public function insert($emp_type_id, $emp_type){
       try{
-        $stmt = $this->conn->prepare("INSERT INTO employee (emp_id, emp_name, gender, dept_id, work_type_id, emp_type_id) 
-        VALUES(:emp_id,:emp_name,:gender,:dept_id,:work_type_id,:emp_type_id)");
-        $stmt->bindparam(":emp_id", $emp_id);
-        $stmt->bindparam(":emp_name", $emp_name);
-        $stmt->bindparam(":gender", $gender);
-        $stmt->bindparam(":dept_id", $dept_id);
-        $stmt->bindparam(":work_type_id", $work_type_id);
+        $stmt = $this->conn->prepare("INSERT INTO emp_type (emp_type_id,emp_type) 
+        VALUES(emp_type_id,:emp_type)");
         $stmt->bindparam(":emp_type_id", $emp_type_id);
+        $stmt->bindparam(":emp_type", $emp_type);
         $stmt->execute();
         return $stmt;
       }catch(PDOException $e){
         echo $e->getMessage();
       }
     }
+
   }
 ?>

@@ -75,8 +75,12 @@ if (mysqli_num_rows($result) > 0) {
         <td>'. $row["dept_name"].'</td>
         <td>'. $row["work_type_name"].'</td>
         <td>'. $row["emp_type"].'</td>
-        <td><a href="#?'. $row["emp_id"].'">Edit</a></td>
+        <td><a class="btn btn-dark" href="#?'. $row["emp_id"].'">Edit</a>
+        <a class="btn btn-danger" 
+        href="./delete_employee.php?id='. $row["emp_id"].' " onclick="return confirm("Yes or No?")"> Delete </a>
+        </td>
         </tr>
+        
         ';
     }
 } else {
@@ -88,7 +92,7 @@ mysqli_close($connect);
 ?>
     </table>
     <div class="container-login100-form-btn">
-        </br><a href="emp_form.php">ADD</a>
+        </br><a class="btn btn-success" href="emp_form.php">ADD</a>
     </div>
     <?php
     // Create connection
@@ -134,7 +138,7 @@ mysqli_close($connect);
     </table>
 
     <div class="container-login100-form-btn">
-        </br><a href="emp_form.php">ADD</a>
+        </br><a class="btn btn-success" href="emp_form.php">ADD</a>
     </div>
     <?php
     // Create connection
@@ -176,7 +180,7 @@ mysqli_close($connect);
 ?>
     </table>
     <div class="container-login100-form-btn">
-        </br><a href="emp_form.php">ADD</a>
+        </br><a class="btn btn-success" href="emp_form.php">ADD</a>
     </div>
     <?php
     // Create connection
@@ -220,7 +224,7 @@ mysqli_close($connect);
 ?>
     </table>
     <div class="container-login100-form-btn">
-        </br><a href="emp_form.php">ADD</a>
+        </br><a class="btn btn-success" href="emp_form.php">ADD</a>
     </div>
 
 </body>
