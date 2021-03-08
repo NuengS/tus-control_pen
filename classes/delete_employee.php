@@ -1,13 +1,14 @@
+
 <?php
-require_once './classes/user.php';
+require_once 'user.php';
 
 $objUser = new User();
 
 if(isset($_SESSION['username'])){
-    objUser -> redirect ('index.php');
+    $objUser -> redirect ('index.php');
 }
  try{
-    $sql = "DELETE FROM employee WHERE emp_id='".$_GET['id']." ";
+    $sql = "DELETE FROM employee WHERE emp_id='".$_GET['id']."'";
 
     $stmt = $objUser->runQuery($sql);
     $stmt -> execute();
