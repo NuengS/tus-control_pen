@@ -26,7 +26,7 @@ if(isset($_POST['btn_save'])){
      echo $e->getMessage();
    }
  }
- 
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,9 +38,15 @@ if(isset($_POST['btn_save'])){
 </head>
 
 <body>
+
+
+<?php
+ require_once 'sidebar.php';
+?>
+
 <div class="container">
     <form method="post">
-        <div class="form-group">
+        <div class="form-group ">
             </br>
             <div class="form-group row">
                 <div class="col-3 col-form-label">
@@ -152,6 +158,7 @@ if(isset($_POST['btn_save'])){
 
         </div>
     </form>
+    </div>
     </div>
 </body>
 

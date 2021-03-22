@@ -25,32 +25,19 @@
         $('.employee_data').DataTable();
     });
     </script>
-    
 </head>
 <?php
  require_once 'sidebar.php';
 ?>
-<body>
-
-
-    
-
     <?php
-
-// Create connection
+    // Create connection
 $connect = new mysqli('localhost', 'root', '', 'tus-control_pen');
 // Check connection
 if (!$connect) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql = "SELECT * FROM (((employee 
-    INNER JOIN department
-    ON employee.dept_id = department.dept_id)
-    INNER JOIN work_type
-    ON employee.work_type_id = work_type.work_type_id)
-    INNER JOIN emp_type
-    ON employee.emp_type_id = emp_type.emp_type_id);";
+$sql = "SELECT * FROM department";
 $result = mysqli_query($connect, $sql);
 ?>
     <div class="container">
@@ -59,42 +46,28 @@ $result = mysqli_query($connect, $sql);
                 <thead>
                     <td>id</td>
                     <td>name</td>
-                    <td>เพศ</td>
-                    <td>แผนก/ฝ่ายขาย</td>
-                    <td>ประเภทของงาน</td>
-                    <td>ประเภทของพนักงงาน</td>
-                    <td>action</td>
+                    <td>Action</td>
+
                 </thead>
         </div>
     </div>
     <?php
+
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
-    
     while($row = mysqli_fetch_assoc($result)) {
-        if($row["gender"]=="M"){
-            $row["gender"]="ชาย";
-        }else {
-            $row["gender"]="หญิง";
-        }
         echo '
         <tr>
-        <td>'. $row["emp_id"].'</td>
-        <td>'. $row["emp_name"].'</td>
-        <td>'. $row["gender"].'</td>
+        <td>'. $row["dept_id"].'</td>
         <td>'. $row["dept_name"].'</td>
-        <td>'. $row["work_type_name"].'</td>
-        <td>'. $row["emp_type"].'</td>
-        <td><a class="btn btn-dark" href="emp_form_edit.php?id='. $row["emp_id"].'">Edit</a>
+        <td><a class="btn btn-dark" href="emp_form_edit.php?id='. $row["dept_id"].'">Edit</a>
         <a class="btn btn-danger" 
-         href=" delete_employee.php?id='. $row["emp_id"].' " 
+        onclick="return confirm(\'Are you sure?\')" href=" delete_employee.php?id='. $row["dept_id"].' " 
         "
         > Delete </a>
         </td>
         </tr>
-        
         ';
-        //onclick="return confirm(\'Are you sure?\')"
     }
 } else {
     echo "0 results";
@@ -102,17 +75,14 @@ if (mysqli_num_rows($result) > 0) {
 
 
 mysqli_close($connect);
+
 ?>
     </table>
+
     <div class="container-login100-form-btn">
         </br><a class="btn btn-success" href="emp_form.php">ADD</a>
-    </div>
+        </div>
     
+    </body>
     
-   
-
-    
-
-</body>
-
-</html>
+    </html>

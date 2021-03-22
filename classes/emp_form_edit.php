@@ -38,6 +38,9 @@ if (isset($_POST['btn_up'])) {
     <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
 
 </head>
+<?php
+ require_once 'sidebar.php';
+?>
 
 <body>
     <div class="container">
@@ -58,7 +61,7 @@ if (isset($_POST['btn_up'])) {
                     <div class="col-4">
 
                         <input class="form-control" type="text" name="emp_id" id="emp_id" autofocus
-                            placeholder="รหัสตามบัตรพนักงาน" required value="<?php print($rows['emp_id']) ?>">
+                            placeholder="รหัสตามบัตรพนักงาน" required value="<?php print($rows['emp_id']) ?>"readonly >
 
                     </div>
                 </div>
