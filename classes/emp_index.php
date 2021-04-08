@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -10,32 +11,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
     </script>
-
-       
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js">
-
-	
-
-    
     </script>
     <script>
     $(document).ready(function() {
         $('.employee_data').DataTable();
     });
     </script>
-    
+     
 </head>
 <?php
  require_once 'sidebar.php';
 ?>
 <body>
-
-
-    
-
-    <?php
+<?php
 
 // Create connection
 $connect = new mysqli('localhost', 'root', '', 'tus-control_pen');
@@ -52,7 +43,9 @@ $sql = "SELECT * FROM (((employee
     INNER JOIN emp_type
     ON employee.emp_type_id = emp_type.emp_type_id);";
 $result = mysqli_query($connect, $sql);
+
 ?>
+
     <div class="container">
         <div class="table-responsive">
             <table class="table table-striped table-bordered employee_data">
@@ -67,7 +60,9 @@ $result = mysqli_query($connect, $sql);
                 </thead>
         </div>
     </div>
-    <?php
+
+<?php
+
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
     
@@ -86,13 +81,17 @@ if (mysqli_num_rows($result) > 0) {
         <td>'. $row["work_type_name"].'</td>
         <td>'. $row["emp_type"].'</td>
         <td><a class="btn btn-dark" href="emp_form_edit.php?id='. $row["emp_id"].'">Edit</a>
+
+        
+        
         <a class="btn btn-danger" 
-         href=" delete_employee.php?id='. $row["emp_id"].' " 
+         href=" delete_employee.php?id='. $row["emp_id"].'  " onclick="return confirm(\'Are you sure?\')"
         "
         > Delete </a>
         </td>
         </tr>
         
+
         ';
         //onclick="return confirm(\'Are you sure?\')"
     }
@@ -101,11 +100,15 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 
+
+
+
 mysqli_close($connect);
 ?>
     </table>
     <div class="container-login100-form-btn">
         </br><a class="btn btn-success" href="emp_form.php">ADD</a>
+        
     </div>
     
     

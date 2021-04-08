@@ -11,14 +11,14 @@
         integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
     </script>
 
-       
+
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js">
 
-	
 
-    
+
+
     </script>
     <script>
     $(document).ready(function() {
@@ -29,7 +29,7 @@
 <?php
  require_once 'sidebar.php';
 ?>
-    <?php
+<?php
     // Create connection
 $connect = new mysqli('localhost', 'root', '', 'tus-control_pen');
 // Check connection
@@ -40,18 +40,18 @@ if (!$connect) {
 $sql = "SELECT * FROM department";
 $result = mysqli_query($connect, $sql);
 ?>
-    <div class="container">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered employee_data">
-                <thead>
-                    <td>id</td>
-                    <td>name</td>
-                    <td>Action</td>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered employee_data">
+            <thead>
+                <td>id</td>
+                <td>name</td>
+                <td>Action</td>
 
-                </thead>
-        </div>
+            </thead>
     </div>
-    <?php
+</div>
+<?php
 
 if (mysqli_num_rows($result) > 0) {
     // output data of each row
@@ -62,7 +62,7 @@ if (mysqli_num_rows($result) > 0) {
         <td>'. $row["dept_name"].'</td>
         <td><a class="btn btn-dark" href="emp_form_edit.php?id='. $row["dept_id"].'">Edit</a>
         <a class="btn btn-danger" 
-        onclick="return confirm(\'Are you sure?\')" href=" delete_employee.php?id='. $row["dept_id"].' " 
+        onclick="confirmDelete(this);" href=" delete_employee.php?id='. $row["dept_id"].' " 
         "
         > Delete </a>
         </td>
@@ -77,12 +77,12 @@ if (mysqli_num_rows($result) > 0) {
 mysqli_close($connect);
 
 ?>
-    </table>
+</table>
 
-    <div class="container-login100-form-btn">
-        </br><a class="btn btn-success" href="emp_form.php">ADD</a>
-        </div>
-    
-    </body>
-    
-    </html>
+<div class="container-login100-form-btn">
+    </br><a class="btn btn-success" href="emp_form.php">ADD</a>
+</div>
+
+</body>
+
+</html>

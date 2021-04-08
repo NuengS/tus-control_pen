@@ -1,76 +1,138 @@
 <?php
- 
- $connect = new mysqli('localhost', 'root', '', 'tus-control_pen');
- // Check connection
- if (!$connect) {
-     die("Connection failed: " . mysqli_connect_error());
- }
- 
- $a = $sql = "SELECT COUNT(*) FROM employee WHERE dept_id = 01 AND work_type_id = 01 ";
- $dataPoints1 = array(
-	array("label"=> "บัญชีรายวัน", "y"=> $a),
-	array("label"=> "บัญชีรายเดือน", "y"=> $quere = "SELECT COUNT(*) as number FROM employee WHERE dept_id = 02 AND work_type_id = 01 "),
-    array("label"=> "ขายรายวัน", "y"=> $sql = "SELECT COUNT(*) FROM employee WHERE dept_id = 01;"),
-	array("label"=> "ขายรายเดือน", "y"=> 4),
-    array("label"=> "บุคคลรายวัน", "y"=> 4),
-	array("label"=> "บุคคลรายเดือน", "y"=> 4),
-);
 
-	
+$connect = mysqli_connect("localhost", "root", "", "tus-control_pen");
+$query = "SELECT count(*) as present_absent_count, dept_id,
+     case
+         when dept_id = 01 then 'บัญชี'
+         when dept_id = 02 then 'ขาย'
+         when dept_id = 03 then 'บุคคล'
+       end as dept_id FROM employee GROUP BY dept_id ;";
+$result = mysqli_query($connect, $query);
+$i = 0;
+while ($row = mysqli_fetch_array($result)) {
+    $label[$i] = $row["dept_id"];
+    $count[$i] = $row["present_absent_count"];
+    $i++;
+}
+
 ?>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 
 <head>
-    <script>
-    window.onload = function() {
 
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            theme: "light2",
-            title: {
-                text: "กราฟแสดงจำนวนของแผนกตามประเภทของพนักงาน"
-            },
-            axisY: {
-                includeZero: true
-            },
-            legend: {
-                cursor: "pointer",
-                verticalAlign: "center",
-                horizontalAlign: "right",
-                itemclick: toggleDataSeries
-            },
-            data: [{
-                type: "column",
-                name: "Real Trees",
-                indexLabel: "{y}",
-                yValueFormatString: "$#0.##",
-                showInLegend: true,
-                dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
-            }]
-        });
-        chart.render();
-
-        function toggleDataSeries(e) {
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else {
-                e.dataSeries.visible = true;
-            }
-            chart.render();
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Graph</title>
+    <style>
+        body {
+            width: 660px;
+            margin: 0 auto;
         }
-
-    }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
+        $(document).ready(function() {
+            $('.employee_data').DataTable();
+        });
     </script>
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawPieChart);
+
+        function drawPieChart() {
+            var pie = google.visualization.arrayToDataTable([
+                ['attendancede', 'Numbder'],
+                ['<?php echo $label[0]; ?>', <?php echo $count[0]; ?>],
+                ['<?php echo $label[1]; ?>', <?php echo $count[1]; ?>],
+                ['<?php echo $label[2]; ?>', <?php echo $count[2]; ?>],
+
+            ]);
+            var header = {
+                title: 'Number of employees for each pass',
+                slices: {
+                    0: {
+                        color: '#666666'
+                    },
+                    1: {
+                        color: '#006EFF'
+                    }
+                }
+
+            };
+            var piechart = new google.visualization.PieChart(document.getElementById('piechart'));
+            piechart.draw(pie, header);
+        }
+    </script>
 </head>
 <?php
- require_once 'sidebar.php';
+require_once 'sidebar.php';
 ?>
 
 <body>
-    <div id="chartContainer" style="height: 370px; width: 60%;"></div>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    </br>
+    <h3>จำนวนพนักงานแต่ละฝ่าย</h3>
+    <div id="piechart"></div>
+
+    <div class="col-sm-12">
+        <h3>List</h3>
+        <table class="table table-striped" border="1" cellpadding="0" cellspacing="0" align="center">
+            <thead>
+                <tr class="table-primary">
+                    <th width="20%">ลำดับ</th>
+                    <th width="50%">ฝ่าย/แผนก</th>
+                    <th width="10%">
+                        <center>จำนวน</center>
+                    </th>
+                </tr>
+            </thead>
+
+
+            <?php
+
+            $sql = "SELECT count(*) as present_absent_count, dept_id,
+                    case
+                        when dept_id = 01 then 'บัญชี'
+                        when dept_id = 02 then 'ขาย'
+                        when dept_id = 03 then 'บุคคล'
+                      end as dept_id FROM employee GROUP BY dept_id ;";
+            $result2 = mysqli_query($connect, $sql);
+            $s = 1;
+            while ($row2 = mysqli_fetch_array($result2)) {
+
+            ?>
+
+                <tr>
+
+                    <td><?php echo $s++; ?></td>
+                    <td><?php echo $row2['dept_id']; ?></td>
+                    <td align="right"><?php echo number_format($row2['present_absent_count'], 0); ?></td>
+                </tr>
+            <?php
+                @$present_absent_count_total += $row2['present_absent_count'];
+            }
+            ?>
+            <tr class="table-danger">
+                <td align="center"></td>
+                <td align="center">รวม</td>
+                <td align="right"><b>
+                        <?php echo number_format($present_absent_count_total, 2); ?></b></td>
+                </td>
+            </tr>
+        </table>
+
+
+
+
+        <?php
+        mysqli_close($connect);
+        ?>
+        <a href="MyReport.pdf" class="btn btn-primary">Dowload PDF </a>
+
+
 </body>
 
 </html>

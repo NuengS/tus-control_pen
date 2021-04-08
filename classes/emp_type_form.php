@@ -13,7 +13,7 @@ if(isset($_POST['btn_save'])){
     $emp_type  = strip_tags($_POST['emp_type']);
   
     try{
-        $sql = "INSERT emp_type (emp_type_id,emp_type) VALUE ($emp_type_id,'$emp_type')"
+        $sql = "INSERT emp_type (emp_type_id,emp_type) VALUE ($emp_type_id,'$emp_type')";
         $stmt = $objUser->runQuery($sql);
         $stmt -> excute();
         }if($stmt){
