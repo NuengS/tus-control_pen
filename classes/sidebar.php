@@ -12,7 +12,7 @@
       <li class="nav-item">
         <a class="nav-link" href="work_type_show.php">ประเภทของงาน</a>
       </li>
-      
+
       <li class="nav-item">
         <a class="nav-link " href="emp_type_show.php" tabindex="-1" aria-disabled="true">ประเภทของพนักงาน</a>
       </li>
@@ -20,6 +20,6 @@
         <a class="nav-link " href="graphs.php" tabindex="-1" aria-disabled="true">กราฟสรุป</a>
       </li>
     </ul>
-    
+
   </div>
 </nav>

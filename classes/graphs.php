@@ -51,7 +51,6 @@ while ($row = mysqli_fetch_array($result)) {
 
             ]);
             var header = {
-                title: 'Number of employees for each pass',
                 slices: {
                     0: {
                         color: '#666666'
@@ -71,19 +70,25 @@ while ($row = mysqli_fetch_array($result)) {
 require_once 'sidebar.php';
 ?>
 
-<body>
+<body style="width: 100%;">
 
     </br>
-    <h3>จำนวนพนักงานแต่ละฝ่าย</h3>
-    <div id="piechart"></div>
-
-    <div class="col-sm-12">
-        <h3>List</h3>
-        <table class="table table-striped" border="1" cellpadding="0" cellspacing="0" align="center">
+    <div class="text-center">
+        <h4>จำนวนพนักงานแต่ละฝ่าย</h4>
+        <div id="piechart"></div>
+    </div>
+    <div class="col-sm-12" style="text-align:center;">
+        <h5>สรุปจำนวนพนักงานแต่ละฝ่าย</h5>
+        </br>
+        <table class="table table-striped" border="1" cellpadding="0" cellspacing="0" align="center" style="width: 50%;">
             <thead>
                 <tr class="table-primary">
-                    <th width="20%">ลำดับ</th>
-                    <th width="50%">ฝ่าย/แผนก</th>
+                    <th width="10%">
+                        <center>ลำดับ</center>
+                    </th>
+                    <th width="30%">
+                        <center>ฝ่าย/แผนก</center>
+                    </th>
                     <th width="10%">
                         <center>จำนวน</center>
                     </th>
@@ -115,7 +120,7 @@ require_once 'sidebar.php';
                 @$present_absent_count_total += $row2['present_absent_count'];
             }
             ?>
-            <tr class="table-danger">
+            <tr class="table-primary">
                 <td align="center"></td>
                 <td align="center">รวม</td>
                 <td align="right"><b>
@@ -130,7 +135,7 @@ require_once 'sidebar.php';
         <?php
         mysqli_close($connect);
         ?>
-        <a href="MyReport.pdf" class="btn btn-primary">Dowload PDF </a>
+        <a href="printpdf.php" class="btn btn-primary">PDF</a>
 
 
 </body>

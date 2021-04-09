@@ -1,7 +1,7 @@
 <?php
 // Show PHP errors
-ini_set('display_errors',1);
-ini_set('display_startup_erros',1);
+ini_set('display_errors', 1);
+ini_set('display_startup_erros', 1);
 error_reporting(E_ALL);
 
 require_once 'user.php';
@@ -35,11 +35,11 @@ if (isset($_POST['btn_up'])) {
 ?>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./vendor/bootstrap/css/bootstrap.min.css">
 
 </head>
 <?php
- require_once 'sidebar.php';
+require_once 'sidebar.php';
 ?>
 
 <body>
@@ -52,26 +52,21 @@ if (isset($_POST['btn_up'])) {
                     <label for="emp_id" class="col-2 col-form-label">รหัสพนักงาน </label>
                     <?php
 
-                $sql = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
-                $stmt = $objUser->runQuery($sql);
-                $stmt->execute();
-                if ($stmt->rowCount() > 0) {
-                    while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                ?>
-                    <div class="col-4">
+                    $sql = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
+                    $stmt = $objUser->runQuery($sql);
+                    $stmt->execute();
+                    if ($stmt->rowCount() > 0) {
+                        while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                            <div class="col-4">
 
-                        <input class="form-control" type="text" name="emp_id" id="emp_id" autofocus
-                            placeholder="รหัสตามบัตรพนักงาน" required value="<?php print($rows['emp_id']) ?>"readonly >
-
-                    </div>
+                                <input class="form-control" type="text" name="emp_id" id="emp_id" autofocus placeholder="รหัสตามบัตรพนักงาน" required value="<?php print($rows['emp_id']) ?>" readonly>
+                            </div>
                 </div>
-
-
-
-                <?php
+        <?php
+                        }
                     }
-                }
-                ?>
+        ?>
 
 
             </div>
@@ -81,25 +76,24 @@ if (isset($_POST['btn_up'])) {
                     <label for="emp_name" class="col-2 col-form-label">ชื่อ สกุล *</label>
                     <?php
 
-                $sql = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
-                $stmt = $objUser->runQuery($sql);
-                $stmt->execute();
-                if ($stmt->rowCount() > 0) {
-                    while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                ?>
+                    $sql = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
+                    $stmt = $objUser->runQuery($sql);
+                    $stmt->execute();
+                    if ($stmt->rowCount() > 0) {
+                        while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
 
-                    <div class="col-4">
+                            <div class="col-4">
 
-                        <input class="form-control" type="text" name="emp_name" id="emp_name"
-                            placeholder="ชื่อนามสกุล พนักงาน" required value="<?php print($rows['emp_name']) ?>">
+                                <input class="form-control" type="text" name="emp_name" id="emp_name" placeholder="ชื่อนามสกุล พนักงาน" required value="<?php print($rows['emp_name']) ?>">
 
 
-                    </div>
+                            </div>
                 </div>
-                <?php
+        <?php
+                        }
                     }
-                }
-                ?>
+        ?>
 
             </div>
             <div class="form-group row">
@@ -111,22 +105,20 @@ if (isset($_POST['btn_up'])) {
                 if ($stmt->rowCount() > 0) {
                     while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
-                <label class="col-2" for="gender">เพศ *</label>
-                <div class="col-4">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control" type="radio" id="female" name="gender" value="F"
-                            <?php echo ($rows['gender'] == 'F') ? 'checked' : '' ?>>
-                        <label class="custom-control-label" for="female">หญิง</label><br>
-                    </div>
+                        <label class="col-2" for="gender">เพศ *</label>
+                        <div class="col-4">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input class="custom-control" type="radio" id="female" name="gender" value="F" <?php echo ($rows['gender'] == 'F') ? 'checked' : '' ?>>
+                                <label class="custom-control-label" for="female">หญิง</label><br>
+                            </div>
 
 
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control" type="radio" id="male" name="gender" value="M"
-                            <?php echo ($rows['gender'] == 'M') ? 'checked' : '' ?>>
-                        <label class="custom-control-label" for="male">ชาย</label><br>
-                    </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input class="custom-control" type="radio" id="male" name="gender" value="M" <?php echo ($rows['gender'] == 'M') ? 'checked' : '' ?>>
+                                <label class="custom-control-label" for="male">ชาย</label><br>
+                            </div>
 
-                </div>
+                        </div>
                 <?php
                     }
                 }
@@ -138,28 +130,29 @@ if (isset($_POST['btn_up'])) {
                 <div class="col-10">
                     <select name="dept_id" id="dept_id" class="custom-select">
                         <?php
-                    $sql = "SELECT * FROM department";
-                    $sql2 = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
-                    $stmt = $objUser->runQuery($sql);
-                    $stmt2 = $objUser->runQuery($sql2);
-                    $stmt->execute();
-                    $stmt2->execute();
-                    if ($stmt2->rowCount() > 0) {
-                        while ($rows2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                            if ($stmt->rowCount() > 0) {
-                                while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php print($rows['dept_id']) ?>"
-                            <?php if ($rows2['dept_id'] == $rows['dept_id']) {echo "selected='selected'";} ?>>
-                            <?php print($rows['dept_name']) ?></option>
+                        $sql = "SELECT * FROM department";
+                        $sql2 = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
+                        $stmt = $objUser->runQuery($sql);
+                        $stmt2 = $objUser->runQuery($sql2);
+                        $stmt->execute();
+                        $stmt2->execute();
+                        if ($stmt2->rowCount() > 0) {
+                            while ($rows2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                                if ($stmt->rowCount() > 0) {
+                                    while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                                        <option value="<?php print($rows['dept_id']) ?>" <?php if ($rows2['dept_id'] == $rows['dept_id']) {
+                                                                                                echo "selected='selected'";
+                                                                                            } ?>>
+                                            <?php print($rows['dept_name']) ?></option>
 
                         <?php
-                    
+
+                                    }
                                 }
                             }
                         }
-                    }
-                    ?>
+                        ?>
                     </select>
                 </div>
             </div>
@@ -169,25 +162,25 @@ if (isset($_POST['btn_up'])) {
                     <select name="work_type_id" id="work_type_id" class="custom-select">
 
                         <?php
-                    $sql = "SELECT * FROM work_type";
-                    $sql2 = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
-                    $stmt = $objUser->runQuery($sql);
-                    $stmt2 = $objUser->runQuery($sql2);
-                    $stmt->execute();
-                    $stmt2->execute();
-                    if ($stmt2->rowCount() > 0) {
-                        while ($rows2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                            if ($stmt->rowCount() > 0) {
-                                while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php print($rows['work_type_id']) ?>"><?php print($rows['work_type_name']) ?>
-                        </option>
+                        $sql = "SELECT * FROM work_type";
+                        $sql2 = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
+                        $stmt = $objUser->runQuery($sql);
+                        $stmt2 = $objUser->runQuery($sql2);
+                        $stmt->execute();
+                        $stmt2->execute();
+                        if ($stmt2->rowCount() > 0) {
+                            while ($rows2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                                if ($stmt->rowCount() > 0) {
+                                    while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                                        <option value="<?php print($rows['work_type_id']) ?>"><?php print($rows['work_type_name']) ?>
+                                        </option>
                         <?php
+                                    }
                                 }
                             }
                         }
-                    }
-                    ?>
+                        ?>
                     </select>
                 </div>
             </div>
@@ -197,26 +190,27 @@ if (isset($_POST['btn_up'])) {
                     <select name="emp_type_id" id="emp_type_id" class="custom-select">
 
                         <?php
-                    $sql = "SELECT * FROM emp_type";
-                    $sql2 = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
-                    $stmt = $objUser->runQuery($sql);
-                    $stmt2 = $objUser->runQuery($sql2);
-                    $stmt->execute();
-                    $stmt2->execute();
-                    if ($stmt2->rowCount() > 0) {
-                        while ($rows2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                            if ($stmt->rowCount() > 0) {
-                                while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    ?>
-                        <option value="<?php print($rows['emp_type_id']) ?>"
-                            <?php if ($rows2['emp_type_id'] == $rows['emp_type_id']) {echo "selected='selected'";} ?>>
-                            <?php print($rows['emp_type']) ?></option>
+                        $sql = "SELECT * FROM emp_type";
+                        $sql2 = "SELECT * FROM employee WHERE emp_id='" . $_GET["id"] . "'";
+                        $stmt = $objUser->runQuery($sql);
+                        $stmt2 = $objUser->runQuery($sql2);
+                        $stmt->execute();
+                        $stmt2->execute();
+                        if ($stmt2->rowCount() > 0) {
+                            while ($rows2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
+                                if ($stmt->rowCount() > 0) {
+                                    while ($rows = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                                        <option value="<?php print($rows['emp_type_id']) ?>" <?php if ($rows2['emp_type_id'] == $rows['emp_type_id']) {
+                                                                                                    echo "selected='selected'";
+                                                                                                } ?>>
+                                            <?php print($rows['emp_type']) ?></option>
                         <?php
+                                    }
                                 }
                             }
                         }
-                    }
-                    ?>
+                        ?>
                     </select>
                 </div>
             </div>
@@ -232,6 +226,6 @@ if (isset($_POST['btn_up'])) {
 </body>
 
 
-<?php 
+<?php
 
 ?>
